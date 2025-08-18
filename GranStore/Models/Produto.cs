@@ -7,7 +7,7 @@ public class Produto
     public string Nome { get; set; }
 
     public string Descricao { get; set; }
-    
+
     public Categoria Categoria { get; set; }
 
     public int QtdeEstoque { get; set; }
@@ -15,4 +15,6 @@ public class Produto
     public decimal ValorCusto { get; set; }
 
     public decimal ValorVenda { get; set; }
+    
+    public string Foto { get; set; }
 }
