@@ -7,14 +7,12 @@ namespace GranStore.Controllers;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
+    private List<Produto> produtos;
 
     public HomeController(ILogger<HomeController> logger)
     {
         _logger = logger;
-    }
 
-    public IActionResult Index()
-    {
         List<Categoria> categorias = new List<Categoria>
         {
             new Categoria
@@ -27,10 +25,10 @@ public class HomeController : Controller
             {Id = 4, Nome = "Mochilas"},
             new Categoria
             {Id = 5, Nome = "Inverno"},
-        
+
         };
 
-        List<Produto> produtos = new List<Produto>
+        produtos = new List<Produto>
         {
             new Produto
             { Id = 1, Categoria = categorias[0], Nome = "Chuteira Campo Adidas F50 Club Unissex - Branco+Rosa", Descricao = "Rabisque a zaga toda com a Chuteira Campo Adidas F50 Club! Ideal para quem busca performance nas quatro linhas, esta chuteira de campo Adidas é leve e macia. O cabedal confeccionado em sintético traz tecnologia Fiberskin, que se adapta ao formato do pé, garantindo conforto nos chutes precisos. Seu solado com travas fixas proporcionam maior aderência ao gramado natural, enquanto o design garante a classe do jogador profissional. Marcar golaços nunca foi tão fácil. Peça já sua chuteira da Adidas!", ValorCusto = 100.00m, ValorVenda = 264.50m, QtdeEstoque = 24, Foto = "/img/produtos/0.png"},
@@ -49,10 +47,19 @@ public class HomeController : Controller
             new Produto
             {Id = 8, Categoria = categorias[1], Nome = "Camisa Barcelona Dry Azul - Azul", Descricao = "Composição: 100% Poliéster Cor Predominante: Azul Indicada para: Treino Escudo: Estampado Gênero: Masculino Clube: Barcelona", ValorCusto = 58.11m, ValorVenda = 98.90m, QtdeEstoque = 54, Foto = "/img/produtos/6.png"},
             new Produto
-            {Id = 9, Categoria = categorias[0], Nome = "Chuteira Puma Attacanto BDP Society Masculina - Azul", Descricao = "Composição cabedal (parte superior): Material sintético reforçado Palmilha: EVA e removível; facilita o momento da higienização Forro: Revestimento em têxtil com acolchoamento no calcanhar Solado: Borracha com micro travas fixas, colado", ValorCusto = 200.67m, ValorVenda = 247.12m, QtdeEstoque = 132, Foto = "/img/produtos/8.png"},        
+            {Id = 9, Categoria = categorias[0], Nome = "Chuteira Puma Attacanto BDP Society Masculina - Azul", Descricao = "Composição cabedal (parte superior): Material sintético reforçado Palmilha: EVA e removível; facilita o momento da higienização Forro: Revestimento em têxtil com acolchoamento no calcanhar Solado: Borracha com micro travas fixas, colado", ValorCusto = 200.67m, ValorVenda = 247.12m, QtdeEstoque = 132, Foto = "/img/produtos/8.png"},
         };
+    }
 
-        return View();
+    public IActionResult Index()
+    {
+        return View(produtos);
+    }
+
+    public IActionResult Produtos(int id)
+    {
+        var produto = produtos.SingleOrDefault(p => p.Id == id);
+        return View(produto);
     }
 
     public IActionResult Privacy()
